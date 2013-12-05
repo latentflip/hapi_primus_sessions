@@ -19,7 +19,7 @@ var config = {
 
     //Path to mount the internal request at
     //shouldn't need to be changed unless there's a conflict
-    routePath: '/hapi-primus-session/write-session'
+    routePath: '/hapi-primus-sessions/write-session'
 };
 
 var log = function () {
