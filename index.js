@@ -4,6 +4,7 @@
  */
 
 var http = require('http');
+var package = require('./package.json');
 
 var config = {
     primus: null,
@@ -70,7 +71,7 @@ var primusPlugin = function (hapiServer) {
 
 module.exports = {
     name: 'primus_hapi_sessions',
-    version: '0.0.1',
+    version: package.version,
     register: function (plugin, options, next) {
         Object.keys(options).forEach(function (k) {
             if (config[k]) {
