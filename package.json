@@ -7,5 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Philip Roberts",
+  "repository": "git://github.com/latentflip/hapi_primus_sessions.git",
   "license": "MIT"
 }
