@@ -44,6 +44,9 @@ primus.on('connection', function (spark) {
 });
 ```
 
+The hapi plugin will register the primus half of the plugin with primus for you.
+
+
 ### Hapi Plugin options
 
 The hapi plugin takes a number of options:
