@@ -24,12 +24,11 @@ var server = new Hapi.Server('localhost', 3030);
 var Primus = require('primus');
 vae primus = new Primus(server.listener, { transformer: 'socket.io' });
 
-server.pack({
-        hapi_primus_sessions: { primus: primus, server: server }
-    },
-    function (pluginsCallback (err) {
-        if (err) throw err;
-    }
+server.pack.require({
+    hapi_primus_sessions: { primus: primus, server: server }
+},
+function pluginsCallback (err) {
+    if (err) throw err;
 });
 
 primus.on('connection', function (spark) {
