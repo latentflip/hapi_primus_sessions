@@ -64,6 +64,12 @@ A `getSession` method is added to every primus spark object. It accepts a callba
 Session is the session object direct from hapi, so you can use it to auth/lookup the current user/etc as if you were within the hapi stack.
 
 
+## Caveats
+
+* **Probably won't work if you require the plugin into multiple servers:** as per [issue#2](https://github.com/latentflip/hapi_primus_sessions/issues/2).
+
+
+
 ## How?
 
 Don't ask.
