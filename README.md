@@ -9,27 +9,10 @@ Typically primus binds to the same http server as hapi, but listens for it's own
 This plugin extends both hapi and primus to allow you access to the session from within a primus request.
 
 
-## How?
-
-Don't ask.
-
-Ok, really?
-
-You sure?
-
-Ok, fine. The spark object in primus is a partial request object, all it really has access to is the raw HTTP headers. But these are typically encrypted and decrypted deep in the bowels of hapi, so they aren't much use outside of the hapi stack.
-
-Hapi doesn't expose any methods to retrieve a session, so we have to get funky. The plugin creates a fake http request and response object, which it emits from the http server that hapi is listening to, pointed at a custom route we inject into hapi. We add the encrypted headers from the primus spark to the request object, and a custom `writeSession` method to the response object which is scoped within the primus spark object.
-
-Hapi happily takes the fake request, decodes the session information, and passes it all along to our custom hapi route handler, along with our fake response object. Our hapi handler then calls our custom `writeSession` method on the fake response object passing the session object, and `writeSession` passes it back into the scope of the spark.
-
-
-## Is there a better way to do this
-
-I hope so, but we haven't found it yet.
-
 
 ## Usage
+
+Install it from npm: `npm install hapi_primus_sessions --save`.
 
 Require in your hapi server pack as with any hapi plugin:
 
@@ -79,6 +62,21 @@ A `getSession` method is added to every primus spark object. It accepts a callba
 Session is the session object direct from hapi, so you can use it to auth/lookup the current user/etc as if you were within the hapi stack.
 
 
+## How?
+
+Don't ask.
+
+Ok, really?
+
+You sure?
+
+Ok, fine. The spark object in primus is a partial request object, all it really has access to is the raw HTTP headers. But these are typically encrypted and decrypted deep in the bowels of hapi, so they aren't much use outside of the hapi stack.
+
+Hapi doesn't expose any methods to retrieve a session, so we have to get funky. The plugin creates a fake http request and response object, which it emits from the http server that hapi is listening to, pointed at a custom route we inject into hapi. We add the encrypted headers from the primus spark to the request object, and a custom `writeSession` method to the response object which is scoped within the primus spark object.
+
+Hapi happily takes the fake request, decodes the session information, and passes it all along to our custom hapi route handler, along with our fake response object. Our hapi handler then calls our custom `writeSession` method on the fake response object passing the session object, and `writeSession` passes it back into the scope of the spark.
+
+
 ## License
 
 MIT
@@ -86,6 +84,7 @@ MIT
 
 ## Infrequently Asked Questions
 
+* **Isn't there a better way to do this?** I hope so, but we haven't found it yet.
 * **Is this stable?** Well, it works for me.
 * **Can I contribute/suggest a better way of doing this?** Please do.
 * **Are there tests?** If you can show me how to test this, there will be.
